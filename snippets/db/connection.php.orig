@@ -1,0 +1,13 @@
+<?php
+try {
+<<<<<<< HEAD
+    $dbh = new PDO('mysql:host=localhost;dbname=registry_guest', 'alfabrad', '_Asukal01_');
+=======
+    $dbh = new PDO('mysql:host=localhost;dbname=registry_guest', 'user', 'password');
+>>>>>>> d6dabd6b13a2b485644f4170324c0e11985a85d9
+    $dbh->exec("SET CHARACTER SET utf8");    
+}
+catch ( PDOException $e ){
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+}
