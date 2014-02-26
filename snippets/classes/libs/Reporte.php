@@ -14,13 +14,14 @@ class Reporte extends Model {
     
     public function obtenerCabecera ( )
     {
-        $this->setTableName ( '`questions` AS q' )
+        $this->setTableName ( '`questions` AS q' );
         
         $fields     = array(
             'q.`question` AS Question'
         );
         $conditions = array(
-            'order' => 'ORDER BY Question ASC'
+            'order'         => 'Question',
+            'orderSense'    => 'ASC'
         );
         $table = '';
         
@@ -33,7 +34,7 @@ class Reporte extends Model {
     {
         $table      = $this->obtenerCabecera();
         
-        $this->setTableName ( '`users` AS u, `answers` AS a, `questions` AS q' )
+        $this->setTableName ( '`users` AS u, `answers` AS a' );
         
         $fields     = array(
             'a.`answers` AS Answers',
@@ -42,13 +43,18 @@ class Reporte extends Model {
             '( SELECT u.`username` FROM `users` AS u WHERE u.`id_user` = a.`id_user` ) AS Username'
         );
         $conditions = array(
-            'order' => 'ID_User ASC',
-            'limit' => '0, 10'
+            'where'         => 'a.`id_user` = u.`id_user`',
+            'order'         => 'ID_User',
+            'orderSense'    => 'ASC'
         );
         
         $resultSet  = $this->select( $fields, $conditions );
         
-        $table += $this->_generarRepote($resultSet);
+        if ( $this->getNumRows() ) {
+            
+            echo $table;
+            echo $this->_generarRepote($resultSet);
+        }
         return $table;
     }
     
@@ -77,16 +83,16 @@ class Reporte extends Model {
             $body .= "<tr>
                     <td class=\"column_id\">{$answers['ID_User']}</td>
                     <td class=\"column_name\">{$answers['Nombre']}</td>
-                    <td class=\"column_username\">{$answers['Username']}</td>";
-                foreach( $answers['Answer'] as $respuesta ){
-                    $body   .= "<td class=\"column_answer\">{$Respuesta['Answer']}</td>";
-                }
+                    <td class=\"column_username\">{$answers['Username']}</td>
+                    <td class=\"column_answer\">{$answers['Answers']}</td>";
+                /*foreach( $answers['Answers'] as $respuesta ){
+                    $body   .= "<td class=\"column_answer\">{$Respuesta['Answers']}</td>";
+                }*/
             $body .= "</tr>";
         }
         
-        $footer = '</tbody></table>';
-        $table  = $body . $footer;
-        return $table;
-    }  
-    
+        $footer     = '</tbody></table>';
+        $tableBody  = $body . $footer;
+        return $tableBody;
+    }
 }

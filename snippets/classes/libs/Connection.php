@@ -12,7 +12,7 @@ class Connection{
     protected $_numRows = 0;
     protected $_resource = null;
     
-    public function __construct( $host = 'localhost' , $user = 'r3p0r73', $password = '4f6caXzxdzAp,R{sdtXCuRib', $name = 'cuestionario' ) {
+    public function __construct( $host = 'localhost' , $user = 'r3p0r73', $password = '4f6caXzxdzAp,R{sdtXCuRib', $name = 'cuestionario2' ) {
         $this->_dbHost = $host; 
         $this->_dbUser = $user;
         $this->_dbPassword = $password;

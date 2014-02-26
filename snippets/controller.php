@@ -28,18 +28,15 @@ $action     = ( isset( $_GET['action'] ) ) ? $_GET['action']: "";
 
 switch ($action) {
     case 'makeReport':
-        $descarga = new Reporte( $dbh );
-        $success = $descarga->ObtenerReporte( );
-        echo $success;
         header("Content-Disposition: attachment; filename=Reporte.xls");
         header("Content-Type: application/force-download");
-        header("Content-Transfer-Encoding: binary");  
+        header("Content-Transfer-Encoding: binary");
         header("Connection: close");
+        $descarga = new Reporte( $dbh );
+        $success = $descarga->ObtenerReporte( );
         break;
     default:
         
         header( "location:{$site_url}" );
         break;
 }
-
-echo $success;

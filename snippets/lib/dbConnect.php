@@ -11,7 +11,7 @@ class dbConnect {
         $host       = 'localhost',
         $user       = 'r3p0r73',
         $password   = '4f6caXzxdzAp,R{sdtXCuRib',
-        $dbname     = 'cuestionario'
+        $dbname     = 'cuestionario2'
     ) {
           $this->_host      = $host;
           $this->_user      = $user;
